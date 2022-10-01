@@ -7,8 +7,11 @@ use CodeIgniter\Controller;
 class Welcome extends Controller {
 
     public function index() {
-        $session = session();
-        echo "Welcome back, " . $session->get('name');
+         $session = session();
+
+        if (!$session->get('logged_in'))
+            return redirect()->to('/login');
+        return view('welcome');
     }
 
 }
